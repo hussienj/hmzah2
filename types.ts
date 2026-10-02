@@ -11,6 +11,7 @@ export interface Subject {
 export interface TeacherAssignment {
     classId: string;
     subjectId: string;
+    subjectName?: string;
 }
 
 export interface User {
