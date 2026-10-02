@@ -14,21 +14,44 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
-    <script src="/vendor/xlsx.full.min.js"></script>
-    <script src="/vendor/exceljs.min.js"></script>
-    <script src="/vendor/jspdf.umd.min.js"></script>
-    <script src="/vendor/html2canvas.min.js"></script>
-    <script src="/vendor/qrcode.min.js"></script>
-    <!-- Word Export Library -->
-    <script src="/vendor/docx.min.js"></script>
-    <script src="/vendor/FileSaver.min.js"></script>
     
+    <!-- مكتبات التصدير والمعالجة عبر شبكة CDN عالمية لتعمل على أي مسار أو نطاق مثل GitHub Pages -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/docx@7.1.0/build/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    
+    <!-- احتياطي محلي في حال انقطاع الإنترنت عن شبكة CDN -->
+    <script>
+      (function() {
+        function loadFallback(cond, src) {
+          if (!cond()) {
+            var s = document.createElement('script');
+            s.src = src;
+            document.head.appendChild(s);
+          }
+        }
+        window.addEventListener('DOMContentLoaded', function() {
+          loadFallback(function() { return !!window.XLSX; }, './vendor/xlsx.full.min.js');
+          loadFallback(function() { return !!window.ExcelJS; }, './vendor/exceljs.min.js');
+          loadFallback(function() { return !!window.jspdf; }, './vendor/jspdf.umd.min.js');
+          loadFallback(function() { return !!window.html2canvas; }, './vendor/html2canvas.min.js');
+          loadFallback(function() { return !!window.QRCode; }, './vendor/qrcode.min.js');
+          loadFallback(function() { return !!window.docx; }, './vendor/docx.min.js');
+          loadFallback(function() { return !!window.saveAs; }, './vendor/FileSaver.min.js');
+        });
+      })();
+    </script>
+
     <script>
       if (typeof window !== 'undefined') {
         window.process = window.process || {};
         window.process.env = window.process.env || {};
       }
-      // إزالة أي Service Worker قديم لمنع التعليق وحلقات إعادة التحميل
+      // إزالة أي Service Worker قديم لمنع التعليق
       if (typeof navigator !== 'undefined' && 'serviceWorker' in navigator) {
         navigator.serviceWorker.getRegistrations().then(function(registrations) {
           for (var i = 0; i < registrations.length; i++) {
@@ -57,7 +80,6 @@
         display: none; cursor: pointer; border: none;
       }
     </style>
-    <link rel="stylesheet" href="/index.css">
   </head>
   <body>
     <div id="app-loader">
@@ -88,13 +110,13 @@
         }
       }, 2000);
 
-      // أمان إضافي لإخفاء شاشة التحميل تلقائياً
+      // أمان إضافي لإخفاء شاشة التحميل تلقائياً بعد اكتمال التحميل
       window.addEventListener('load', function() {
         setTimeout(function() {
           window.hideAppLoader();
-        }, 1200);
+        }, 800);
       });
     </script>
-    <script type="module" src="/index.tsx"></script>
+    <script type="module" src="./index.tsx"></script>
   </body>
 </html>
