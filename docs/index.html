@@ -80,6 +80,7 @@
         display: none; cursor: pointer; border: none;
       }
     </style>
+    <script type="module" crossorigin src="./assets/app.js"></script>
   </head>
   <body>
     <div id="app-loader">
@@ -116,16 +117,6 @@
           window.hideAppLoader();
         }, 800);
       });
-    </script>
-    <script type="module">
-      // في وضع التطوير المحلي أو بيئة AI Studio يتم تشغيل كود TypeScript مباشرة
-      // أما في بيئة النشر الثابت مثل GitHub Pages يتم تشغيل الحزمة المجمعة الجاهزة (app.js)
-      var isDev = window.location.port === '3000' || window.location.hostname.includes('run.app') || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-      if (isDev) {
-        import('./index.tsx');
-      } else {
-        import('./assets/app.js');
-      }
     </script>
   </body>
 </html>
